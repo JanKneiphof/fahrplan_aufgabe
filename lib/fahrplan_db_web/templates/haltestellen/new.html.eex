@@ -1,0 +1,5 @@
+<h1>New Haltestelle</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.haltestellen_path(@conn, :create)) %>
+
+<span><%= link "Back", to: Routes.haltestellen_path(@conn, :index) %></span>

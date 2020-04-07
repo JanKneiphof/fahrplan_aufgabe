@@ -1,0 +1,26 @@
+<h1>Listing Haltestellen</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for haltestelle <- @haltestellen do %>
+    <tr>
+      <td><%= haltestelle.name %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.haltestellen_path(@conn, :show, haltestelle) %></span>
+        <span><%= link "Edit", to: Routes.haltestellen_path(@conn, :edit, haltestelle) %></span>
+        <span><%= link "Delete", to: Routes.haltestellen_path(@conn, :delete, haltestelle), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Haltstelle", to: Routes.haltestellen_path(@conn, :new) %></span>

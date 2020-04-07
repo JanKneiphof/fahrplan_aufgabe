@@ -4,6 +4,7 @@ defmodule FahrplanDb.Fahrplan do
 
 	alias FahrplanDb.Repo
 	alias FahrplanDb.Linie
+	alias FahrplanDb.Haltestelle
 	
 	def list_linien do
 		Repo.all(Linie)
@@ -31,5 +32,19 @@ defmodule FahrplanDb.Fahrplan do
 	
 	def change_linie(%Linie{} = linie) do
 		Linie.changeset(linie, %{})
+	end
+
+	def list_haltestellen do
+		Repo.all(Haltestelle)
+	end
+
+	def change_haltestelle(%Haltestelle{} = haltestelle) do
+		Haltestelle.changeset(haltestelle, %{})
+	end
+
+	def create_haltestelle(params) do
+		%Haltestelle{}
+		|>Haltestelle.changeset(params)
+		|>Repo.insert()
 	end
 end

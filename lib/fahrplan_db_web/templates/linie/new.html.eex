@@ -1,0 +1,5 @@
+<h1>New Linie</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.linie_path(@conn, :create)) %>
+
+<span><%= link "Back", to: Routes.linie_path(@conn, :index) %></span>

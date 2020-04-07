@@ -1,0 +1,13 @@
+<h1>Show Linie</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @linie.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.linie_path(@conn, :edit, @linie) %></span>
+<span><%= link "Back", to: Routes.linie_path(@conn, :index) %></span>

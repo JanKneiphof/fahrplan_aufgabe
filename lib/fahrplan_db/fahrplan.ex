@@ -12,6 +12,7 @@ defmodule FahrplanDb.Fahrplan do
 	
 	def get_linie!(id) do
 		Repo.get!(Linie, id)
+		|> Repo.preload(:haltestellen)
 	end
 	
 	def create_linie(attrs \\ %{}) do

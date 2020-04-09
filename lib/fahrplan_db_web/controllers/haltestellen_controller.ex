@@ -25,4 +25,29 @@ defmodule FahrplanDbWeb.HaltestellenController do
 			render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def show(conn, %{"id" => id}) do
+    haltestelle = Fahrplan.get_haltestelle!(id)
+    render(conn, "show.html", haltestelle: haltestelle)
+  end
+
+  def edit(conn, %{"id" => id}) do
+    haltestelle = Fahrplan.get_haltestelle!(id)
+    changeset = Fahrplan.change_haltestelle(haltestelle)
+    render(conn, "edit.html", haltestelle: haltestelle, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "haltestelle" => haltestellen_params}) do
+    haltestelle = Fahrplan.get_haltestelle!(id)
+
+    case Fahrplan.update_haltestelle(haltestelle, haltestellen_params) do
+      {:ok, haltestelle} ->
+        conn
+        |> put_flash(:info, "Haltestelle updated successfully.")
+        |> redirect(to: Routes.haltestellen_path(conn, :show, haltestelle))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", haltestelle: haltestelle, changeset: changeset)
+    end
+  end
 end

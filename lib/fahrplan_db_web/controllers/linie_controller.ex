@@ -16,7 +16,9 @@ defmodule FahrplanDbWeb.LinieController do
   end
 
   def create(conn, %{"linie" => linie_params}) do
-    case Fahrplan.create_linie(linie_params) do
+    updated_params = create_params_with_haltestellen(linie_params)
+
+    case Fahrplan.create_linie(updated_params) do
       {:ok, linie} ->
         conn
         |> put_flash(:info, "Linie created successfully.")
@@ -44,7 +46,9 @@ defmodule FahrplanDbWeb.LinieController do
   def update(conn, %{"id" => id, "linie" => linie_params}) do
     linie = Fahrplan.get_linie!(id)
 
-    case Fahrplan.update_linie(linie, linie_params) do
+    update_params = create_params_with_haltestellen(linie_params)
+
+    case Fahrplan.update_linie(linie, update_params) do
       {:ok, linie} ->
         conn
         |> put_flash(:info, "Linie updated successfully.")
@@ -63,5 +67,15 @@ defmodule FahrplanDbWeb.LinieController do
     conn
     |> put_flash(:info, "Linie deleted successfully.")
     |> redirect(to: Routes.linie_path(conn, :index))
+  end
+
+  defp create_params_with_haltestellen(%{"haltestellen" => haltestellen} = linie_params) do
+    selected_haltestellen = Enum.map(haltestellen, &Fahrplan.get_haltestelle!(&1))
+
+    %{linie_params | "haltestellen" => selected_haltestellen}
+  end
+
+  defp create_params_with_haltestellen(linie_params) do
+    Map.merge(linie_params, %{"haltestellen" => []})
   end
 end

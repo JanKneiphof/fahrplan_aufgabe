@@ -5,6 +5,13 @@
   <li>
     <strong>Name:</strong>
     <%= @linie.name %>
+
+  </li>
+  <li>
+    <strong>Haltestellen:</strong>
+    |<%= for haltestelle <- @linie.haltestellen do %>
+    <%= haltestelle.name %> |
+    <% end %>
   </li>
 
 </ul>

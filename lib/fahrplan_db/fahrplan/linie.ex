@@ -4,7 +4,11 @@ defmodule FahrplanDb.Linie do
 
   schema "linie" do
     field :name, :string
-    many_to_many(:haltestellen, FahrplanDb.Haltestelle, join_through: "haltstellen_linien")
+
+    many_to_many(:haltestellen, FahrplanDb.Haltestelle,
+      join_through: "haltestellen_linien",
+      on_replace: :delete
+    )
 
     timestamps()
   end
@@ -12,6 +16,7 @@ defmodule FahrplanDb.Linie do
   def changeset(linie, attrs) do
     linie
     |> cast(attrs, [:name])
+    |> put_assoc(:haltestellen, attrs["haltestellen"])
     |> validate_required([:name])
   end
 end

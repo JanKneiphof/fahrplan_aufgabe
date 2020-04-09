@@ -11,7 +11,8 @@ defmodule FahrplanDbWeb.LinieController do
 
   def new(conn, _params) do
     changeset = Fahrplan.change_linie(%Linie{})
-    render(conn, "new.html", changeset: changeset)
+    haltestellen = Fahrplan.list_haltestellen()
+    render(conn, "new.html", changeset: changeset, haltestellen: haltestellen, linie: %Linie{})
   end
 
   def create(conn, %{"linie" => linie_params}) do
@@ -22,7 +23,9 @@ defmodule FahrplanDbWeb.LinieController do
         |> redirect(to: Routes.linie_path(conn, :show, linie))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        haltestellen = Fahrplan.list_haltestellen()
+
+        render(conn, "new.html", changeset: changeset, linie: %Linie{}, haltestellen: haltestellen)
     end
   end
 
@@ -34,7 +37,8 @@ defmodule FahrplanDbWeb.LinieController do
   def edit(conn, %{"id" => id}) do
     linie = Fahrplan.get_linie!(id)
     changeset = Fahrplan.change_linie(linie)
-    render(conn, "edit.html", linie: linie, changeset: changeset)
+    haltestellen = Fahrplan.list_haltestellen()
+    render(conn, "edit.html", linie: linie, changeset: changeset, haltestellen: haltestellen)
   end
 
   def update(conn, %{"id" => id, "linie" => linie_params}) do
@@ -47,7 +51,8 @@ defmodule FahrplanDbWeb.LinieController do
         |> redirect(to: Routes.linie_path(conn, :show, linie))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", linie: linie, changeset: changeset)
+        haltestellen = Fahrplan.list_haltestellen()
+        render(conn, "edit.html", linie: linie, changeset: changeset, haltestellen: haltestellen)
     end
   end
 

@@ -5,6 +5,7 @@ defmodule FahrplanDb.Fahrplan do
 	alias FahrplanDb.Repo
 	alias FahrplanDb.Linie
 	alias FahrplanDb.Haltestelle
+	alias FahrplanDb.Stop
 
 	def list_linien do
 		Repo.all(Linie)
@@ -64,4 +65,12 @@ defmodule FahrplanDb.Fahrplan do
 		|> Repo.update()
 	end
 
+	def list_stops() do
+		Repo.all(Stop)
+	end
+
+	def get_stop!(id) do
+		Repo.get!(Stop, id)
+		|>Repo.preload([:haltestelle, :linie])
+	end
 end

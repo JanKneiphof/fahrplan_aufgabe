@@ -23,4 +23,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Haltstelle", to: Routes.haltestellen_path(@conn, :new) %></span>
+<span><%= link "New Haltestelle", to: Routes.haltestellen_path(@conn, :new) %></span>

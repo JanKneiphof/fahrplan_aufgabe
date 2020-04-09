@@ -19,6 +19,7 @@ defmodule FahrplanDbWeb.Router do
     get "/", PageController, :index
     resources "/linien", LinieController
     resources "/haltestellen", HaltestellenController
+    resources "/stop", StopController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,14 @@
+<h1>Show Stop</h1>
+
+<ul>
+
+	<li>
+		<strong>Haltstelle:</strong>
+		<%= @stop.haltestelle.name %>
+	</li>
+	<li>
+		<strong>Linie:</strong>
+		<%= @stop.linie.name %>
+	</li>
+
+</ul>

@@ -5,6 +5,7 @@ defmodule FahrplanDb.Stop do
   schema "stop" do
     belongs_to(:haltestelle, FahrplanDb.Haltestelle)
     belongs_to(:linie, FahrplanDb.Linie)
+    field(:uhrzeit, :time)
   end
 
 end

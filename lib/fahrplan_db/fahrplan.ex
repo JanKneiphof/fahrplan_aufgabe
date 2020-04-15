@@ -1,5 +1,4 @@
 defmodule FahrplanDb.Fahrplan do
-
 	import Ecto.Query, warn: false
 
 	alias FahrplanDb.Repo
@@ -9,9 +8,14 @@ defmodule FahrplanDb.Fahrplan do
 
 	def list_linien do
 		Repo.all(Linie)
+		|> Repo.preload(:haltestellen)
 	end
 
-	def get_linie!(id) do
+	def get_linie(id) do
+		Repo.get(Linie, id)
+	end
+
+	def get_linie_with_preload!(id) do
 		Repo.get!(Linie, id)
 		|> Repo.preload(:haltestellen)
 	end
@@ -38,6 +42,7 @@ defmodule FahrplanDb.Fahrplan do
 
 	def list_haltestellen do
 		Repo.all(Haltestelle)
+		|> Repo.preload(:linien)
 	end
 
 	def change_haltestelle(%Haltestelle{} = haltestelle) do
@@ -46,17 +51,21 @@ defmodule FahrplanDb.Fahrplan do
 
 	def create_haltestelle(params) do
 		%Haltestelle{}
-		|>Haltestelle.changeset(params)
-		|>Repo.insert()
+		|> Haltestelle.changeset(params)
+		|> Repo.insert()
 	end
 
-	def get_haltestelle!(id) do
-		Repo.get!(Haltestelle, id)
+	def get_haltestelle_preload_linien(id) do
+		Repo.get(Haltestelle, id)
 		|> Repo.preload(:linien)
 	end
 
+	def get_haltestelle(id) do
+		Repo.get(Haltestelle, id)
+	end
+
 	def get_haltestellen!(id_list) do
-		Enum.map(id_list, &get_haltestelle!/1)
+		Enum.map(id_list, &get_haltestelle/1)
 	end
 
 	def update_haltestelle(%Haltestelle{} = haltestelle, attrs) do

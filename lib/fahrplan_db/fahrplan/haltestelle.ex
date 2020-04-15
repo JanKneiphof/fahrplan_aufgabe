@@ -4,7 +4,12 @@ defmodule FahrplanDb.Haltestelle do
 
   schema "haltestelle" do
     field :name, :string
-    many_to_many(:linien, FahrplanDb.Linie, join_through: "haltestellen_linien")
+
+    many_to_many(:linien, FahrplanDb.Linie,
+      join_through: "haltestellen_linien",
+      on_delete: :delete_all
+    )
+
     timestamps()
   end
 

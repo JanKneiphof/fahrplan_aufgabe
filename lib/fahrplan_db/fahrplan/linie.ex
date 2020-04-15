@@ -7,7 +7,7 @@ defmodule FahrplanDb.Linie do
 
     many_to_many(:haltestellen, FahrplanDb.Haltestelle,
       join_through: "haltestellen_linien",
-      on_replace: :delete
+      on_delete: :delete_all
     )
 
     timestamps()

@@ -7,5 +7,5 @@ defmodule FahrplanDb.Repo.Migrations.CreateStopTable do
       add :haltestelle_id, references(:haltestelle)
       add :linie_id, references(:linie)
     end
-   end
+  end
 end

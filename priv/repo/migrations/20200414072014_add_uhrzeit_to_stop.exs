@@ -5,6 +5,5 @@ defmodule FahrplanDb.Repo.Migrations.AddUhrzeitToStop do
     alter table("stop") do
       add :uhrzeit, :time
     end
-
   end
 end

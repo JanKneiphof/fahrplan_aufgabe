@@ -14,6 +14,7 @@ defmodule FahrplanDb.Stop do
     |> put_assoc(:linie, attrs["linie"])
     |> put_assoc(:haltestelle, attrs["haltestelle"])
     |> validate_required([:haltestelle, :linie, :uhrzeit])
+
     # |> validate_combination_allowed(attrs["haltestelle"])
     # Die auskommentierte Validation lehnt alles ab, irgendwas stimmt damit nicht
   end

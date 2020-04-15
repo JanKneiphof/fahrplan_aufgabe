@@ -7,6 +7,5 @@ defmodule FahrplanDb.Repo.Migrations.AddLinienTable do
 
       timestamps()
     end
-
   end
 end

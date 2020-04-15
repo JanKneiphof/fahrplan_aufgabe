@@ -1,3 +1,3 @@
 defmodule FahrplanDbWeb.HaltestellenView do
-	use FahrplanDbWeb, :view
+  use FahrplanDbWeb, :view
 end

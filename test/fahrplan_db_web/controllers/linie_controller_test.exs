@@ -75,6 +75,7 @@ defmodule FahrplanDbWeb.LinieControllerTest do
     test "deletes chosen linie", %{conn: conn, linie: linie} do
       conn = delete(conn, Routes.linie_path(conn, :delete, linie))
       assert redirected_to(conn) == Routes.linie_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.linie_path(conn, :show, linie))
       end

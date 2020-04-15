@@ -21,24 +21,24 @@ defmodule FahrplanDbWeb.HaltestellenController do
         |> put_flash(:info, "Haltestelle created successfully.")
         |> redirect(to: Routes.haltestellen_path(conn, :index, Fahrplan.list_linien()))
 
-		{:error, %Ecto.Changeset{} = changeset} ->
-			render(conn, "new.html", changeset: changeset)
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    haltestelle = Fahrplan.get_haltestelle!(id)
+    haltestelle = Fahrplan.get_haltestelle_preload_linien(id)
     render(conn, "show.html", haltestelle: haltestelle)
   end
 
   def edit(conn, %{"id" => id}) do
-    haltestelle = Fahrplan.get_haltestelle!(id)
+    haltestelle = Fahrplan.get_haltestelle_preload_linien(id)
     changeset = Fahrplan.change_haltestelle(haltestelle)
     render(conn, "edit.html", haltestelle: haltestelle, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "haltestelle" => haltestellen_params}) do
-    haltestelle = Fahrplan.get_haltestelle!(id)
+    haltestelle = Fahrplan.get_haltestelle_preload_linien(id)
 
     case Fahrplan.update_haltestelle(haltestelle, haltestellen_params) do
       {:ok, haltestelle} ->

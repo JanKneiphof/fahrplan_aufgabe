@@ -67,10 +67,25 @@ defmodule FahrplanDb.Fahrplan do
 
 	def list_stops() do
 		Repo.all(Stop)
+		|> Repo.preload([:haltestelle, :linie])
 	end
 
 	def get_stop!(id) do
 		Repo.get!(Stop, id)
-		|>Repo.preload([:haltestelle, :linie])
+		|> Repo.preload([:haltestelle, :linie])
+	end
+
+	def change_stop(%Stop{} = stop) do
+		Stop.changeset(stop, %{})
+	end
+
+	def create_stop(params) do
+		%Stop{}
+		|> Stop.changeset(params)
+		|> Repo.insert()
+	end
+
+	def delete_haltestelle(haltestelle) do
+		Repo.delete(haltestelle)
 	end
 end

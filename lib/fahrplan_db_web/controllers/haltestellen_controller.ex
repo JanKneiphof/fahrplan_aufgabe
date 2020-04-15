@@ -50,4 +50,13 @@ defmodule FahrplanDbWeb.HaltestellenController do
         render(conn, "edit.html", haltestelle: haltestelle, changeset: changeset)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    haltestelle = Fahrplan.get_haltestelle(id)
+    {:ok, _haltestelle} = Fahrplan.delete_haltestelle(haltestelle)
+
+    conn
+    |> put_flash(:info, "Haltestelle deleted.")
+    |> redirect(to: Routes.haltestellen_path(conn, :index))
+  end
 end

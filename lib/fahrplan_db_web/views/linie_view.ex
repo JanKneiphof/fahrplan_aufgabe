@@ -5,13 +5,14 @@ defmodule FahrplanDbWeb.LinieView do
     Enum.map(haltestellen, fn x -> {x.name, x.id} end)
   end
 
-  def linie_has_haltestelle?(linie, haltestelle)do
+  def linie_has_haltestelle?(linie, haltestelle) do
     case Enumerable.impl_for(linie.haltestellen) do
-      nil -> false
+      nil ->
+        false
+
       _ ->
         Enum.map(linie.haltestellen, fn x -> x.id end)
-        |>Enum.member?(haltestelle.id)
-
+        |> Enum.member?(haltestelle.id)
     end
   end
 end

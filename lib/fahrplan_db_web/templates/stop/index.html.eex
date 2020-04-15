@@ -1,0 +1,26 @@
+<h1>Stops</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Haltestelle</th>
+      <th>Uhrzeit</th>
+      <th>Aktion</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for stop <- @stops do %>
+    <tr>
+      <td><%= stop.haltestelle.name %></td>
+      <td><%= stop.uhrzeit %></td>
+      <td>
+        <span><%= link "Show", to: Routes.stop_path(@conn, :show, stop) %></span>
+        <span><%= link "Edit", to: Routes.stop_path(@conn, :edit, stop) %></span>
+        <span><%= link "Delete", to: Routes.stop_path(@conn, :delete, stop), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Neuer Stop", to: Routes.stop_path(@conn, :new) %></span>

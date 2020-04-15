@@ -45,4 +45,9 @@ defmodule FahrplanDbWeb.StopController do
     |> Map.delete("linie_id")
     |> Map.merge(structs)
   end
+
+  def index(conn, _params) do
+    stops = Fahrplan.list_stops()
+    render(conn, "index.html", stops: stops)
+  end
 end

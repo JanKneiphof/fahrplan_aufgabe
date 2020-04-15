@@ -1,14 +1,21 @@
-<h1>Show Stop</h1>
+<h1>Stop</h1>
 
 <ul>
 
 	<li>
-		<strong>Haltstelle:</strong>
-		<%= @stop.haltestelle.name %>
+		<strong>Haltestelle:</strong>
+		<a href="<%= Routes.haltestellen_path(@conn, :show, @stop.haltestelle.id) %>"><%= @stop.haltestelle.name %></a>
 	</li>
 	<li>
 		<strong>Linie:</strong>
-		<%= @stop.linie.name %>
+		<a href="<%= Routes.linie_path(@conn, :show, @stop.linie.id) %>"><%= @stop.linie.name %></a>
+	</li>
+	<li>
+		<strong>Uhrzeit:</strong>
+		<%= @stop.uhrzeit %>
 	</li>
 
 </ul>
+
+<span><%= link "Zur Übersicht", to: Routes.stop_path(@conn, :index) %></span>
+<span><%= link "Bearbeiten", to: Routes.stop_path(@conn, :edit, @stop) %></span>

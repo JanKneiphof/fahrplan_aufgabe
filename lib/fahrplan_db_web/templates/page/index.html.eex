@@ -8,6 +8,9 @@
       <li>
         <a href="<%= Routes.haltestellen_path(@conn, :index)%>">Haltestellen</a>
       </li>
+      <li>
+        <a href="<%= Routes.stop_path(@conn, :index)%>">Stops</a>
+      </li>
     </ul>
   </article>
 </section>

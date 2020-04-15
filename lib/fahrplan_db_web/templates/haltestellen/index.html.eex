@@ -1,11 +1,11 @@
-<h1>Listing Haltestellen</h1>
+<h1>Haltestellen</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
 
-      <th></th>
+      <th>Aktion</th>
     </tr>
   </thead>
   <tbody>
@@ -23,4 +23,5 @@
   </tbody>
 </table>
 
-<span><%= link "New Haltestelle", to: Routes.haltestellen_path(@conn, :new) %></span>
+<span><%= link "Neue Haltestelle", to: Routes.haltestellen_path(@conn, :new) %></span>
+<span><%= link "Zur Startseite", to: Routes.page_path(@conn, :index) %></span>

@@ -1,5 +1,5 @@
-<h1>Edit Linie</h1>
+<h1>Bearbeite Haltestelle</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.haltestellen_path(@conn, :update, @haltestelle)) %>
 
-<span><%= link "Back", to: Routes.haltestellen_path(@conn, :index) %></span>
+<span><%= link "Zurück", to: Routes.haltestellen_path(@conn, :index) %></span>

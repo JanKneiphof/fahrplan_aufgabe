@@ -1,4 +1,4 @@
-<h1>Show Haltestelle</h1>
+<h1>Haltestelle</h1>
 
 <ul>
 
@@ -10,11 +10,11 @@
   <li>
     <strong>Linien an dieser Haltestelle:</strong>
     |<%= for linie <- @haltestelle.linien do %>
-    <%= linie.name %> |
+    <a href="<%= Routes.linie_path(@conn, :show, linie.id) %>"><%= linie.name %></a> |
     <% end %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.haltestellen_path(@conn, :edit, @haltestelle) %></span>
-<span><%= link "Back", to: Routes.haltestellen_path(@conn, :index) %></span>
+<span><%= link "Bearbeiten", to: Routes.haltestellen_path(@conn, :edit, @haltestelle) %></span>
+<span><%= link "Zur Übersicht", to: Routes.haltestellen_path(@conn, :index) %></span>

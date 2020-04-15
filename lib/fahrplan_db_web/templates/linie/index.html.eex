@@ -1,11 +1,11 @@
-<h1>Listing Linien</h1>
+<h1>Linien</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
 
-      <th></th>
+      <th>Aktion</th>
     </tr>
   </thead>
   <tbody>
@@ -23,4 +23,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Linie", to: Routes.linie_path(@conn, :new) %></span>
+<span><%= link "Neue Linie", to: Routes.linie_path(@conn, :new) %></span>

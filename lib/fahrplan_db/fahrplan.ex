@@ -106,4 +106,22 @@ defmodule FahrplanDb.Fahrplan do
     Repo.get!(Stop, id)
     |> Repo.preload([:haltestelle, :linie])
   end
+
+  def list_stops_for_linie(id) do
+    query =
+      from s in Stop,
+        where: s.linie_id == ^id
+
+    Repo.all(query)
+    |> Repo.preload([:haltestelle, :linie])
+  end
+
+  def list_stops_for_haltestelle(id) do
+    query =
+      from s in Stop,
+        where: s.haltestelle_id == ^id
+
+    Repo.all(query)
+    |> Repo.preload([:haltestelle, :linie])
+  end
 end

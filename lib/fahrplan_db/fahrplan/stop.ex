@@ -3,8 +3,8 @@ defmodule FahrplanDb.Stop do
   import Ecto.Changeset
 
   schema "stop" do
-    belongs_to(:haltestelle, FahrplanDb.Haltestelle)
-    belongs_to(:linie, FahrplanDb.Linie)
+    belongs_to(:haltestelle, FahrplanDb.Haltestelle, on_replace: :update)
+    belongs_to(:linie, FahrplanDb.Linie, on_replace: :update)
     field(:uhrzeit, :time)
   end
 

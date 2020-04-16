@@ -22,6 +22,13 @@ defmodule FahrplanDbWeb.Router do
     resources "/stop", StopController
   end
 
+  scope "/stop", FahrplanDbWeb do
+    pipe_through(:browser)
+
+    get("/linie/:id", StopController, :stops_from_linie)
+    get("/haltestelle/:id", StopController, :stops_from_haltestelle)
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", FahrplanDbWeb do
   #   pipe_through :api

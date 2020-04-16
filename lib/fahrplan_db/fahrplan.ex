@@ -97,4 +97,13 @@ defmodule FahrplanDb.Fahrplan do
   def delete_haltestelle(haltestelle) do
     Repo.delete(haltestelle)
   end
+
+  def delete_stop(stop) do
+    Repo.delete(stop)
+  end
+
+  def get_stop_preload_haltestelle_linie!(id) do
+    Repo.get!(Stop, id)
+    |> Repo.preload([:haltestelle, :linie])
+  end
 end

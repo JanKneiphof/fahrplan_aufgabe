@@ -10,4 +10,13 @@ defmodule FahrplanDbWeb.StopView do
     id_name_tuple_list = Enum.map(linien, fn x -> {x.name, x.id} end)
     [{"Bitte Linie wählen", -1}] ++ id_name_tuple_list
   end
+
+  def render("edit.html", assigns) do
+    selected_values = %{
+      haltestelle_id: assigns.stop.haltestelle.id,
+      linie_id: assigns.stop.linie.id
+    }
+
+    render_template("new.html", Map.merge(assigns, selected_values))
+  end
 end

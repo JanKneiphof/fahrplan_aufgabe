@@ -6,17 +6,18 @@
 <% end %>
 
 <%= label f, :haltestelle %>
-<%= select(f, :haltestelle_id, haltestellen_select_options(@haltestellen), selected: -1) %>
+<%= select(f, :haltestelle_id, haltestellen_select_options(@haltestellen)) %>
 <br>
 <%= error_tag f, :haltestelle %>
 
 <%= label f, :linie %>
-<%= select(f, :linie_id, linien_select_options(@linien), selected: -1) %>
+<%= select(f, :linie_id, linien_select_options(@linien)) %>
 <br>
 <%= error_tag f, :linie %>
 
 <%= label f, :uhrzeit %>
 <%= time_input(f, :uhrzeit) %>
+<%= error_tag f, :uhrzeit %>
 <div>
   <%= submit "Save" %>
 </div>

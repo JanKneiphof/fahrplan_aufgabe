@@ -10,6 +10,8 @@ defmodule FahrplanDb.Haltestelle do
       on_delete: :delete_all
     )
 
+    has_many(:stops, {"stop", FahrplanDb.Stop}, on_delete: :delete_all)
+
     timestamps()
   end
 

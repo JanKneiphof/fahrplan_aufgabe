@@ -1,0 +1,5 @@
+<h1><%= @linie.name %></h1>
+
+<%= render "index.html", assigns %>
+
+<span><%= link "Zurück", to: Routes.linie_path(@conn, :show, @linie) %></span>

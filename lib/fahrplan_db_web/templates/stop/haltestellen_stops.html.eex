@@ -1,0 +1,5 @@
+<h1><%= @haltestelle.name %></h1>
+
+<%= render "index.html", assigns %>
+
+<span><%= link "Zurück", to: Routes.haltestellen_path(@conn, :show, @haltestelle) %></span>

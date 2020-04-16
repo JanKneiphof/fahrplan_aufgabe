@@ -13,6 +13,9 @@
     <a href="<%= Routes.linie_path(@conn, :show, linie.id) %>"><%= linie.name %></a> |
     <% end %>
   </li>
+  <li>
+    <strong><%= link "Zeige alle Stops an dieser Haltestelle", to: Routes.stop_path(@conn, :stops_from_haltestelle, @haltestelle) %></strong>
+  </li>
 
 </ul>
 

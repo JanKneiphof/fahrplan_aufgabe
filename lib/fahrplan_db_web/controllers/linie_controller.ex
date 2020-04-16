@@ -40,7 +40,12 @@ defmodule FahrplanDbWeb.LinieController do
     linie = Fahrplan.get_linie_with_preload!(id)
     changeset = Fahrplan.change_linie(linie)
     haltestellen = Fahrplan.list_haltestellen()
-    render(conn, "edit.html", linie: linie, changeset: changeset, haltestellen: haltestellen)
+
+    render(conn, "edit.html",
+      linie: linie,
+      changeset: changeset,
+      haltestellen: haltestellen
+    )
   end
 
   def update(conn, %{"id" => id, "linie" => linie_params}) do

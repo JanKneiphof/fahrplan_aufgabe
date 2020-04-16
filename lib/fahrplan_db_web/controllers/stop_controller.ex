@@ -13,7 +13,12 @@ defmodule FahrplanDbWeb.StopController do
     changeset = Fahrplan.change_stop(%Stop{})
     haltestellen = Fahrplan.list_haltestellen()
     linien = Fahrplan.list_linien()
-    render(conn, "new.html", changeset: changeset, haltestellen: haltestellen, linien: linien)
+
+    render(conn, "new.html",
+      changeset: changeset,
+      haltestellen: haltestellen,
+      linien: linien
+    )
   end
 
   def create(conn, %{"stop" => stop_params}) do
@@ -49,5 +54,28 @@ defmodule FahrplanDbWeb.StopController do
   def index(conn, _params) do
     stops = Fahrplan.list_stops()
     render(conn, "index.html", stops: stops)
+  end
+
+  def delete(conn, %{"id" => id}) do
+    stop = Fahrplan.get_stop!(id)
+    {:ok, _stop} = Fahrplan.delete_stop(stop)
+
+    conn
+    |> put_flash(:info, "Stop deleted successfully")
+    |> redirect(to: Routes.stop_path(conn, :index))
+  end
+
+  def edit(conn, %{"id" => id}) do
+    stop = Fahrplan.get_stop_preload_haltestelle_linie!(id)
+    changeset = Fahrplan.change_stop(stop)
+    haltestellen = Fahrplan.list_haltestellen()
+    linien = Fahrplan.list_linien()
+
+    render(conn, "edit.html",
+      stop: stop,
+      changeset: changeset,
+      haltestellen: haltestellen,
+      linien: linien
+    )
   end
 end

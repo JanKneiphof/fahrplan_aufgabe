@@ -12,7 +12,7 @@ defmodule FahrplanDbWeb.LinieController do
   def new(conn, _params) do
     changeset = Fahrplan.change_linie(%Linie{})
     haltestellen = Fahrplan.list_haltestellen()
-    render(conn, "new.html", changeset: changeset, haltestellen: haltestellen, linie: %Linie{})
+    render(conn, "new.html", changeset: changeset, haltestellen: haltestellen)
   end
 
   def create(conn, %{"linie" => linie_params}) do

@@ -75,7 +75,7 @@ defmodule FahrplanDb.Fahrplan do
   end
 
   def list_stops() do
-    Repo.all(Stop)
+    Repo.all(Stop |> order_by([u], asc: u.uhrzeit))
     |> Repo.preload([:haltestelle, :linie])
   end
 
@@ -110,7 +110,8 @@ defmodule FahrplanDb.Fahrplan do
   def list_stops_for_linie(id) do
     query =
       from s in Stop,
-        where: s.linie_id == ^id
+        where: s.linie_id == ^id,
+        order_by: s.uhrzeit
 
     Repo.all(query)
     |> Repo.preload([:haltestelle, :linie])
@@ -119,7 +120,8 @@ defmodule FahrplanDb.Fahrplan do
   def list_stops_for_haltestelle(id) do
     query =
       from s in Stop,
-        where: s.haltestelle_id == ^id
+        where: s.haltestelle_id == ^id,
+        order_by: s.uhrzeit
 
     Repo.all(query)
     |> Repo.preload([:haltestelle, :linie])

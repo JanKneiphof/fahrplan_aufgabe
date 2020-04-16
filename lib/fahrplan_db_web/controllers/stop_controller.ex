@@ -78,4 +78,16 @@ defmodule FahrplanDbWeb.StopController do
       linien: linien
     )
   end
+
+  def stops_from_linie(conn, %{"id" => id}) do
+    stops = Fahrplan.list_stops_for_linie(id)
+    linie = Fahrplan.get_linie(id)
+    render(conn, "linien_stops.html", stops: stops, linie: linie)
+  end
+
+  def stops_from_haltestelle(conn, %{"id" => id}) do
+    stops = Fahrplan.list_stops_for_haltestelle(id)
+    haltestelle = Fahrplan.get_haltestelle(id)
+    render(conn, "haltestellen_stops.html", stops: stops, haltestelle: haltestelle)
+  end
 end

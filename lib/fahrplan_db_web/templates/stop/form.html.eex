@@ -6,15 +6,13 @@
 <% end %>
 
 <%= label f, :haltestelle %>
-<%= select(f, :haltestelle_id, haltestellen_select_options(@haltestellen)) %>
+<%= select(f, :haltestelle_id, haltestellen_select_options(@haltestellen), selected: @haltestelle_id) %>
 <br>
-<%= error_tag f, :haltestelle %>
 <%= error_tag f, :haltestelle_id %>
 
 <%= label f, :linie %>
-<%= select(f, :linie_id, linien_select_options(@linien)) %>
+<%= select(f, :linie_id, linien_select_options(@linien), selected: @linie_id) %>
 <br>
-<%= error_tag f, :linie %>
 <%= error_tag f, :linie_id %>
 
 <%= label f, :uhrzeit %>

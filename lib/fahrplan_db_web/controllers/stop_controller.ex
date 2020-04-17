@@ -79,6 +79,28 @@ defmodule FahrplanDbWeb.StopController do
     )
   end
 
+  def update(conn, %{"id" => id, "stop" => stop_params}) do
+    stop = Fahrplan.get_stop_preload_haltestelle_linie!(id)
+
+    case Fahrplan.update_stop(stop, create_params_with_structs(stop_params)) do
+      {:ok, stop} ->
+        conn
+        |> put_flash(:info, "Stop updated succesfully")
+        |> redirect(to: Routes.stop_path(conn, :show, stop))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        haltestellen = Fahrplan.list_haltestellen()
+        linien = Fahrplan.list_linien()
+
+        render(conn, "edit.html",
+          stop: stop,
+          changeset: changeset,
+          haltestellen: haltestellen,
+          linien: linien
+        )
+    end
+  end
+
   def stops_from_linie(conn, %{"id" => id}) do
     stops = Fahrplan.list_stops_for_linie(id)
     linie = Fahrplan.get_linie(id)

@@ -26,3 +26,4 @@
 </table>
 
 <span><%= link "Neuer Stop", to: Routes.stop_path(@conn, :new) %></span>
+<span><%= link "Zur Startseite", to: Routes.page_path(@conn, :index) %></span>

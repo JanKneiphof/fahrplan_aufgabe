@@ -37,12 +37,12 @@ defmodule FahrplanDbWeb.StopController do
     end
   end
 
-  def create_params_with_structs(
-        %{"haltestelle_id" => haltestelle_id, "linie_id" => linie_id} = stop_params
-      ) do
+  defp create_params_with_structs(
+         %{"haltestelle_id" => haltestelle_id, "linie_id" => linie_id} = stop_params
+       ) do
     structs = %{
       "haltestelle" => Fahrplan.get_haltestelle_preload_linien(haltestelle_id),
-      "linie" => Fahrplan.get_linie(linie_id)
+      "linie" => Fahrplan.get_linie_preload_haltestellen(linie_id)
     }
 
     stop_params

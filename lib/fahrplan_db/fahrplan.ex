@@ -126,4 +126,10 @@ defmodule FahrplanDb.Fahrplan do
     Repo.all(query)
     |> Repo.preload([:haltestelle, :linie])
   end
+
+  def update_stop(%Stop{} = stop, attrs) do
+    stop
+    |> Stop.changeset(attrs)
+    |> Repo.update()
+  end
 end

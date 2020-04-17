@@ -21,8 +21,8 @@ defmodule FahrplanDbWeb.StopView do
   end
   def render("new.html", assigns) do
     selected_values = %{
-      haltestelle_id: -1,
-      linie_id: -1
+      haltestelle_id: nil,
+      linie_id: nil
     }
 
     render_template("new.html", Map.merge(assigns, selected_values))

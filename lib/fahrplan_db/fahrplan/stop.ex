@@ -12,20 +12,29 @@ defmodule FahrplanDb.Stop do
     stop
     |> cast(attrs, [:uhrzeit])
     |> put_assoc(:linie, attrs["linie"])
+    |> put_change_id(:linie_id, attrs["linie"])
     |> put_assoc(:haltestelle, attrs["haltestelle"])
+    |> put_change_id(:haltestelle_id, attrs["haltestelle"])
+    |> validate_combination_allowed(attrs["haltestelle"])
     |> validate_required([:haltestelle, :linie, :uhrzeit])
 
-    # |> validate_combination_allowed(attrs["haltestelle"])
-    # Die auskommentierte Validation lehnt alles ab, irgendwas stimmt damit nicht
   end
 
   def validate_combination_allowed(changeset, nil) do
-    validate_inclusion(changeset, :linie, [])
+    validate_inclusion(changeset, :linie_id, [])
   end
 
   def validate_combination_allowed(changeset, haltestelle) do
-    validate_inclusion(changeset, :linie, haltestelle.linien,
+    validate_inclusion(changeset, :linie_id, Enum.map(haltestelle.linien, fn x -> x.id end),
       message: "Die gewählte Linie fährt die gewählte Haltestelle nicht an."
     )
+  end
+
+  def put_change_id(changeset, key, nil) do
+    put_change(changeset, key, nil)
+  end
+
+  def put_change_id(changeset, key, value) do
+    put_change(changeset, key, value.id)
   end
 end

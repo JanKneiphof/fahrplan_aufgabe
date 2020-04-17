@@ -7,7 +7,8 @@ defmodule FahrplanDb.Linie do
 
     many_to_many(:haltestellen, FahrplanDb.Haltestelle,
       join_through: "haltestellen_linien",
-      on_delete: :delete_all
+      on_delete: :delete_all,
+      on_replace: :delete
     )
 
     has_many(:stops, {"stop", FahrplanDb.Stop}, on_delete: :delete_all)

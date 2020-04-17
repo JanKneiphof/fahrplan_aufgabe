@@ -9,11 +9,13 @@
 <%= select(f, :haltestelle_id, haltestellen_select_options(@haltestellen)) %>
 <br>
 <%= error_tag f, :haltestelle %>
+<%= error_tag f, :haltestelle_id %>
 
 <%= label f, :linie %>
 <%= select(f, :linie_id, linien_select_options(@linien)) %>
 <br>
 <%= error_tag f, :linie %>
+<%= error_tag f, :linie_id %>
 
 <%= label f, :uhrzeit %>
 <%= time_input(f, :uhrzeit) %>

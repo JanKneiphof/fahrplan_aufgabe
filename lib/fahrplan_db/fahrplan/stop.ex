@@ -14,11 +14,11 @@ defmodule FahrplanDb.Stop do
     |> put_change_id(:linie_id, attrs["linie"])
     |> put_change_id(:haltestelle_id, attrs["haltestelle"])
     |> validate_combination_allowed(attrs["haltestelle"], attrs["linie"])
-    |> validate_required([:haltestelle, :linie, :uhrzeit])
-
+    |> validate_required([:haltestelle_id, :linie_id, :uhrzeit])
   end
 
-  def validate_combination_allowed(changeset, nil, nil) do
+  def validate_combination_allowed(changeset, haltestelle, linie)
+      when is_nil(haltestelle) or is_nil(linie) do
     validate_inclusion(changeset, :linie_id, [])
   end
 
@@ -26,7 +26,7 @@ defmodule FahrplanDb.Stop do
     validate_inclusion(changeset, :linie_id, Enum.map(haltestelle.linien, fn x -> x.id end),
       message: "Die gewählte Linie fährt die gewählte Haltestelle nicht an."
     )
-    validate_inclusion(changeset, :haltestelle_id, Enum.map(linie.haltestellen, fn x -> x.id end),
+    |> validate_inclusion(:haltestelle_id, Enum.map(linie.haltestellen, fn x -> x.id end),
       message: "Die gewählte Haltestelle wird von der gewählten Linie nicht angefahren."
     )
   end

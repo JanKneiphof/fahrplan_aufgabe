@@ -15,7 +15,7 @@ defmodule FahrplanDb.Fahrplan do
     Repo.get(Linie, id)
   end
 
-  def get_linie_with_preload!(id) do
+  def get_linie_preload_haltestellen!(id) do
     Repo.get!(Linie, id)
     |> Repo.preload(:haltestellen)
   end
